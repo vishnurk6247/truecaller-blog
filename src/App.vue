@@ -1,10 +1,23 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <TheHeader />
+    <Home />
+    <TheFooter />
+  </div>
 </template>
 
 <script>
+import TheHeader from "./components/TheHeader.vue";
+import TheFooter from "./components/TheFooter.vue";
+import Home from "./views/Home.vue";
+
 export default {
   name: "App",
+  components: {
+    TheHeader,
+    TheFooter,
+    Home,
+  },
 };
 </script>
 
