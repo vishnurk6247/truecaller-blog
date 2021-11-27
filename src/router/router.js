@@ -13,7 +13,7 @@ export default new VueRouter({
       component: Home,
     },
     {
-      path: "/post/:slug",
+      path: "/:slug",
       name: "post-detailed-view",
       component: PostDetailedView,
     },

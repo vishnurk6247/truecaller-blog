@@ -1,5 +1,5 @@
 <template>
-  <article class="post-card-container">
+  <article class="post-card-container" @click="viewPost()">
     <header class="post-header">
       <h4
         class="post-category"
@@ -39,32 +39,7 @@ export default {
   },
   computed: {
     renderPostDate: function () {
-      let secondsDiff = moment().diff(moment(this.data.date), "seconds");
-      let minutesDiff = moment().diff(moment(this.data.date), "minutes");
-      let hoursDiff = moment().diff(moment(this.data.date), "hours");
-      let dayDiff = moment().diff(moment(this.data.date), "days");
-      let monthDiff = moment().diff(moment(this.data.date), "months");
-      let yearsDiff = moment().diff(moment(this.data.date), "years");
-
-      let dateString = "";
-      if (secondsDiff < 60) {
-        dateString = `${secondsDiff} ${
-          secondsDiff > 1 ? "seconds" : "second"
-        } ago`;
-      } else if (minutesDiff < 60) {
-        dateString = `${minutesDiff} ${
-          minutesDiff > 1 ? "minutes" : "minute"
-        } ago`;
-      } else if (hoursDiff < 24) {
-        dateString = `${hoursDiff} ${hoursDiff > 1 ? "hours" : "hour"} ago`;
-      } else if (dayDiff < 30) {
-        dateString = `${dayDiff} ${dayDiff > 1 ? "days" : "day"} ago`;
-      } else if (monthDiff < 12) {
-        dateString = `${monthDiff} ${monthDiff > 1 ? "months" : "month"} ago`;
-      } else {
-        dateString = `${yearsDiff} ${yearsDiff > 1 ? "years" : "year"} ago`;
-      }
-      return dateString;
+      return moment(this.data.date).fromNow();
     },
     renderTitle: function () {
       return this.data.title;
@@ -77,6 +52,9 @@ export default {
         return item.name;
       });
     },
+    viewPost: function () {
+      this.$router.push(`/${this.data.slug}`);
+    },
   },
 };
 </script>
@@ -88,6 +66,7 @@ export default {
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 25px rgb(0 0 0 / 5%);
+  cursor: pointer;
 }
 
 .post-header {
