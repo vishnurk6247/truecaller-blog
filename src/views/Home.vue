@@ -109,6 +109,6 @@ export default {
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 350px);
-  grid-gap: 20px;
+  grid-gap: 30px;
 }
 </style>
