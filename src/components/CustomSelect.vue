@@ -1,9 +1,14 @@
 <template>
-  <select :name="selectName" :id="selectName" class="select-parent">
+  <select
+    :name="selectName"
+    :id="selectName"
+    class="select-parent"
+    @change.prevent="onChange"
+  >
     <option
       v-for="option in selectOptions"
       :key="option.ID"
-      :value="option.name"
+      :value="option.slug"
       class="select-option"
     >
       {{ option.name }}
@@ -21,6 +26,10 @@ export default {
     },
     selectOptions: {
       type: Array,
+      required: true,
+    },
+    onChange: {
+      type: Function,
       required: true,
     },
   },
