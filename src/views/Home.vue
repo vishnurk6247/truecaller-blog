@@ -12,7 +12,7 @@
       <div class="list-articles-container">
         <post-card
           v-for="post in posts"
-          :key="post.name"
+          :key="post.slug"
           :data="post"
         ></post-card>
       </div>
@@ -23,6 +23,7 @@
 <script>
 import CustomSelect from "../components/CustomSelect.vue";
 import PostCard from "../components/PostCard.vue";
+import { getPosts, getCategories } from "../apis/blog";
 export default {
   name: "home-page",
   components: {
@@ -39,14 +40,14 @@ export default {
   },
   created() {
     this.fetchCategories();
-    this.fetchArticles(this.pageNo, this.category);
+    this.fetchArticles();
   },
   watch: {
     pageNo: function () {
-      this.fetchArticles(this.pageNo, this.category);
+      this.fetchArticles();
     },
     category: function () {
-      this.fetchArticles(this.pageNo, this.category);
+      this.fetchArticles();
     },
   },
   methods: {
@@ -54,19 +55,15 @@ export default {
       this.pageNo += 1;
     },
     fetchCategories: function () {
-      fetch(
-        "https://public-api.wordpress.com/rest/v1.1/sites/107403796/categories"
-      )
+      getCategories()
         .then((res) => res.json())
         .then((data) => {
           this.categories = data.categories;
         })
         .catch((err) => console.log(err));
     },
-    fetchArticles: function (page, category) {
-      fetch(
-        `https://public-api.wordpress.com/rest/v1.1/sites/107403796/posts/?fields=slug,categories,post_thumbnail,title,date&number=20&page=${page}&category=${category}`
-      )
+    fetchArticles: function () {
+      getPosts(this.pageNo, this.category)
         .then((res) => res.json())
         .then((data) => {
           this.posts = data.posts;

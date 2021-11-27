@@ -11,11 +11,11 @@
     </header>
 
     <div class="post-thumbnail">
-      <img :src="data.post_thumbnail.URL" alt="" />
+      <img :src="data.post_thumbnail.URL" alt="" loading="lazy" />
     </div>
     <div class="post-content">
-      <h1>
-        {{ data.title }}
+      <h1 class="post-title" :title="data.title">
+        {{ renderTitle }}
       </h1>
       <time :datetime="data.date">{{ renderPostDate }}</time>
     </div>
@@ -66,6 +66,9 @@ export default {
       }
       return dateString;
     },
+    renderTitle: function () {
+      return this.data.title;
+    },
   },
   methods: {
     getCategories: function () {
@@ -113,5 +116,8 @@ export default {
 
 .post-content {
   padding: 10px 20px;
+}
+
+.post-title {
 }
 </style>
