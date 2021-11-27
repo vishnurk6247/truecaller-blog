@@ -6,8 +6,9 @@
     <section class="list-articles-wrapper">
       <h2 class="section-heading">Latest articles</h2>
       <custom-select
-        :selectName="categories"
+        :selectName="`categories`"
         :selectOptions="this.categories"
+        :onChange="this.changeCategory"
       ></custom-select>
       <div class="list-articles-container">
         <post-card
@@ -54,11 +55,18 @@ export default {
     changePageNo: function () {
       this.pageNo += 1;
     },
+    changeCategory: function (event) {
+      this.category = event.target.value;
+    },
     fetchCategories: function () {
       getCategories()
         .then((res) => res.json())
         .then((data) => {
-          this.categories = data.categories;
+          let categories = [
+            { name: "All Categories", slug: "" },
+            ...data.categories,
+          ];
+          this.categories = categories;
         })
         .catch((err) => console.log(err));
     },
