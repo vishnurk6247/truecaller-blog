@@ -1,27 +1,44 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Hello world!" />
+    <TheHeader />
+    <router-view></router-view>
+    <TheFooter />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import TheHeader from "./components/TheHeader.vue";
+import TheFooter from "./components/TheFooter.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    TheHeader,
+    TheFooter,
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.87);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  scroll-behavior: smooth;
+}
+
+#app {
+  width: 100vw;
+  max-width: 100%;
+}
+
+.svg-inline--fa path {
+  fill: rgba(0, 0, 0, 0.87);
 }
 </style>
