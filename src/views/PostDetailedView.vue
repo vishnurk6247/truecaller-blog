@@ -126,6 +126,13 @@ export default {
   transform: translate(-50%, -50%);
 }
 
+::v-deep iframe,
+::v-deep img,
+::v-deep p,
+::v-deep figure {
+  max-width: 100%;
+}
+
 ::v-deep a {
   background: none !important;
   text-decoration: none !important;
@@ -138,21 +145,12 @@ export default {
 
 ::v-deep figure {
   margin: 0;
-  max-width: 100%;
-}
-
-::v-deep iframe {
-  max-width: 100%;
 }
 
 ::v-deep img {
-  max-width: 100%;
   object-fit: contain;
 }
 
-::v-deep p {
-  max-width: 100%;
-}
 @media screen and (max-width: 480px) {
   .post-image-bg {
     height: auto;
