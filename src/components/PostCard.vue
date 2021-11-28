@@ -4,9 +4,9 @@
       <h4
         class="post-category"
         v-for="category in postCategories"
-        :key="category"
+        :key="category.ID"
       >
-        {{ category }}
+        {{ category.name }}
       </h4>
     </header>
 
@@ -32,12 +32,13 @@ export default {
   created() {
     this.getCategories();
   },
-  data() {
-    return {
-      postCategories: [],
-    };
-  },
   computed: {
+    postCategories: function () {
+      let categories = Object.values(this.data.categories).map((item) => {
+        return item;
+      });
+      return categories;
+    },
     renderPostDate: function () {
       return moment(this.data.date).fromNow();
     },
@@ -46,12 +47,6 @@ export default {
     },
   },
   methods: {
-    getCategories: function () {
-      let categories = Object.values(this.data.categories);
-      this.postCategories = categories.map((item) => {
-        return item.name;
-      });
-    },
     viewPost: function () {
       this.$router.push(`/${this.data.slug}`);
     },

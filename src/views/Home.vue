@@ -11,11 +11,19 @@
         :onChange="this.changeCategory"
       ></custom-select>
       <div class="list-articles-container">
-        <post-card
-          v-for="post in posts"
-          :key="post.slug"
-          :data="post"
-        ></post-card>
+        <template v-if="postsLoading">
+          <post-card-skeleton
+            v-for="item in new Array(16)"
+            :key="item"
+          ></post-card-skeleton>
+        </template>
+        <template v-else>
+          <post-card
+            v-for="post in posts"
+            :key="post.slug"
+            :data="post"
+          ></post-card>
+        </template>
       </div>
     </section>
   </div>
@@ -24,12 +32,14 @@
 <script>
 import CustomSelect from "../components/CustomSelect.vue";
 import PostCard from "../components/PostCard.vue";
+import PostCardSkeleton from "../components/PostCardSkeleton.vue";
 import { getPosts, getCategories } from "../apis/blog";
 export default {
   name: "home-page",
   components: {
-    CustomSelect,
-    PostCard,
+    "custom-select": CustomSelect,
+    "post-card": PostCard,
+    "post-card-skeleton": PostCardSkeleton,
   },
   data() {
     return {
@@ -37,6 +47,7 @@ export default {
       pageNo: 1,
       categories: [],
       posts: [],
+      postsLoading: false,
     };
   },
   created() {
@@ -71,12 +82,14 @@ export default {
         .catch((err) => console.log(err));
     },
     fetchArticles: function () {
+      this.postsLoading = true;
       getPosts(this.pageNo, this.category)
         .then((res) => res.json())
         .then((data) => {
           this.posts = data.posts;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => (this.postsLoading = false));
     },
   },
 };
