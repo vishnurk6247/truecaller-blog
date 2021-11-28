@@ -17,7 +17,7 @@
     </header>
 
     <div class="post-thumbnail">
-      <img :src="data.post_thumbnail.URL" alt="" loading="lazy" />
+      <img :src="imgSrc" alt="post-image" loading="lazy" />
     </div>
     <div class="post-content">
       <h1 class="post-title" :title="data.title">
@@ -59,6 +59,9 @@ export default {
         ? this.data.title.slice(0, 45) + "..."
         : this.data.title;
     },
+    imgSrc: function () {
+      return this.data?.post_thumbnail?.URL;
+    },
   },
   methods: {
     viewPost: function () {
@@ -84,6 +87,10 @@ export default {
 .post-card-container:hover {
   transform: scale(1.02);
   transition: all 0.2s ease-in-out;
+}
+
+.post-card-container:hover .post-title {
+  color: #0091ea;
 }
 
 .post-header {

@@ -138,6 +138,7 @@ export default {
   font-size: 3.5rem;
   color: #fff;
   text-align: center;
+  text-shadow: 1px 1px 2px rgb(0 0 0 / 30%);
 }
 
 .section-heading {

@@ -36,4 +36,8 @@ body {
   width: 100vw;
   max-width: 100%;
 }
+
+.svg-inline--fa path {
+  fill: rgba(0, 0, 0, 0.87);
+}
 </style>
