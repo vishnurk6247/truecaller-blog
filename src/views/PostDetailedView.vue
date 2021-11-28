@@ -53,10 +53,16 @@ export default {
     fetchPostDetails: function () {
       this.isLoading = true;
       getPostDetails(this.$route.params.slug)
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 200) return res.json();
+          else {
+            this.$router.push("/page-not-found");
+          }
+        })
         .then((data) => {
           this.postDetails = data;
         })
+        .catch((err) => console.log(err))
         .finally(() => (this.isLoading = false));
     },
   },

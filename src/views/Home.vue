@@ -90,7 +90,9 @@ export default {
     },
     fetchCategories: function () {
       getCategories()
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 200) return res.json();
+        })
         .then((data) => {
           let categories = [
             { name: "All Categories", slug: "" },
@@ -103,7 +105,9 @@ export default {
     fetchArticles: function (category) {
       this.postsLoading = true;
       getPosts(this.pageNo, category)
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 200) return res.json();
+        })
         .then((data) => {
           this.posts = data.posts;
           this.totalPosts = data.found;

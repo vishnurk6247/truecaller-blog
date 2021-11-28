@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     viewPost: function () {
-      this.$router.push(`/${this.data.slug}`);
+      this.$router.push(`/post/${this.data.slug}`);
     },
     initialiseColorMap: function () {
       this.colorMap = categoryColor();

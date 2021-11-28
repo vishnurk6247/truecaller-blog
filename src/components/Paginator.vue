@@ -160,6 +160,7 @@ export default {
   background: none;
   border-radius: 50%;
   cursor: pointer;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
 }
 
