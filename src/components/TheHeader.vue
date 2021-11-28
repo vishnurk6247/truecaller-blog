@@ -1,7 +1,7 @@
 <template>
   <header class="app-header">
     <div class="header-logo-container">
-      <a href="" class="app-logo">Truecaller</a>
+      <a href="/" class="app-logo">Truecaller</a>
     </div>
   </header>
 </template>

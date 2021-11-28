@@ -1,13 +1,19 @@
 <template>
   <article class="post-card-container" @click="viewPost()">
     <header class="post-header">
-      <h4
-        class="post-category"
+      <div
+        class="post-categories-container"
         v-for="category in postCategories"
         :key="category.ID"
       >
-        {{ category.name }}
-      </h4>
+        <div
+          class="category-bullet"
+          :style="{ background: `${colorMap.get(category.slug)}` }"
+        ></div>
+        <h4 class="post-category">
+          {{ category.name }}
+        </h4>
+      </div>
     </header>
 
     <div class="post-thumbnail">
@@ -24,28 +30,42 @@
 
 <script>
 import moment from "moment";
+import { categoryColor } from "../utils/categoryHelper";
 export default {
   name: "post-card",
   props: {
     data: { type: Object, required: true },
+  },
+  data() {
+    return {
+      colorMap: null,
+    };
+  },
+  created() {
+    this.initialiseColorMap();
   },
   computed: {
     postCategories: function () {
       let categories = Object.values(this.data.categories).map((item) => {
         return item;
       });
-      return categories;
+      return categories.slice(0, 2);
     },
     renderPostDate: function () {
       return moment(this.data.date).fromNow();
     },
     renderTitle: function () {
-      return this.data.title;
+      return this.data.title.length > 45
+        ? this.data.title.slice(0, 45) + "..."
+        : this.data.title;
     },
   },
   methods: {
     viewPost: function () {
       this.$router.push(`/${this.data.slug}`);
+    },
+    initialiseColorMap: function () {
+      this.colorMap = categoryColor();
     },
   },
 };
@@ -68,15 +88,28 @@ export default {
 
 .post-header {
   display: flex;
+  padding: 0 10px;
+}
+
+.post-header > .post-categories-container {
+  margin-left: 15px;
+}
+
+.post-categories-container {
+  display: flex;
+  align-items: center;
 }
 
 .post-category {
   font-size: 1rem;
-  padding: 0 10px;
+  padding-left: 10px;
 }
 
-.post-category::before {
-  content: "";
+.category-bullet {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: lightblue;
 }
 
 .post-thumbnail {
@@ -95,5 +128,6 @@ export default {
 }
 
 .post-title {
+  height: 46px;
 }
 </style>

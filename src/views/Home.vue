@@ -68,9 +68,11 @@ export default {
   },
   watch: {
     pageNo: function () {
+      this.scrollToView();
       this.fetchArticles();
     },
     category: function () {
+      this.scrollToView();
       this.fetchArticles();
     },
   },
@@ -101,7 +103,6 @@ export default {
         .then((data) => {
           this.posts = data.posts;
           this.totalPosts = data.found;
-          this.scrollToView();
         })
         .catch((err) => console.log(err))
         .finally(() => (this.postsLoading = false));
@@ -132,11 +133,15 @@ export default {
   top: calc(50% - 64px);
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 100vw;
+  max-width: 100%;
   font-size: 3.5rem;
   color: #fff;
+  text-align: center;
 }
 
 .section-heading {
+  font-size: 3rem;
 }
 
 .list-articles-wrapper {
@@ -155,5 +160,19 @@ export default {
   padding: 20px 0;
   width: 100%;
   background: #f7f8f9;
+}
+
+@media screen and (max-width: 480px) {
+  .list-articles-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .banner-text {
+    font-size: 2rem;
+  }
+
+  .section-heading {
+    font-size: 2rem;
+  }
 }
 </style>

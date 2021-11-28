@@ -40,10 +40,28 @@ export default {
 .select-parent {
   height: 50px;
   width: 350px;
+  padding: 0 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  background: #fff;
+  border-radius: 4px;
 }
 
 .select-option {
   height: 50px;
   width: 300px;
+}
+
+@media screen and (max-width: 480px) {
+  .select-parent {
+    width: 100%;
+  }
+
+  .select-option {
+    width: 100%;
+  }
 }
 </style>
