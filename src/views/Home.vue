@@ -3,7 +3,7 @@
     <div class="home-banner">
       <h1 class="banner-text">The Truecaller Blog</h1>
     </div>
-    <section class="list-articles-wrapper">
+    <section class="list-articles-wrapper" id="uid-posts-section">
       <h2 class="section-heading">Latest articles</h2>
       <custom-select
         :selectName="`categories`"
@@ -13,7 +13,7 @@
       <div class="list-articles-container">
         <template v-if="postsLoading">
           <post-card-skeleton
-            v-for="item in new Array(16)"
+            v-for="item in Array(12)"
             :key="item"
           ></post-card-skeleton>
         </template>
@@ -26,6 +26,15 @@
         </template>
       </div>
     </section>
+    <div class="pagination-container">
+      <paginator
+        :currentPage="pageNo"
+        :totalCount="totalPosts"
+        :pageSize="20"
+        :onChange="changePageNo"
+        v-show="totalPosts > 20"
+      ></paginator>
+    </div>
   </div>
 </template>
 
@@ -33,6 +42,7 @@
 import CustomSelect from "../components/CustomSelect.vue";
 import PostCard from "../components/PostCard.vue";
 import PostCardSkeleton from "../components/PostCardSkeleton.vue";
+import Paginator from "../components/Paginator.vue";
 import { getPosts, getCategories } from "../apis/blog";
 export default {
   name: "home-page",
@@ -40,6 +50,7 @@ export default {
     "custom-select": CustomSelect,
     "post-card": PostCard,
     "post-card-skeleton": PostCardSkeleton,
+    paginator: Paginator,
   },
   data() {
     return {
@@ -47,6 +58,7 @@ export default {
       pageNo: 1,
       categories: [],
       posts: [],
+      totalPosts: 0,
       postsLoading: false,
     };
   },
@@ -63,10 +75,11 @@ export default {
     },
   },
   methods: {
-    changePageNo: function () {
-      this.pageNo += 1;
+    changePageNo: function (page) {
+      this.pageNo = page;
     },
     changeCategory: function (event) {
+      this.pageNo = 1;
       this.category = event.target.value;
     },
     fetchCategories: function () {
@@ -87,9 +100,14 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           this.posts = data.posts;
+          this.totalPosts = data.found;
+          this.scrollToView();
         })
         .catch((err) => console.log(err))
         .finally(() => (this.postsLoading = false));
+    },
+    scrollToView: function () {
+      document.getElementById("uid-posts-section").scrollIntoView(true);
     },
   },
 };
@@ -131,5 +149,11 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, 350px);
   grid-gap: 30px;
+}
+
+.pagination-container {
+  padding: 20px 0;
+  width: 100%;
+  background: #f7f8f9;
 }
 </style>

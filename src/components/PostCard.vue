@@ -29,9 +29,6 @@ export default {
   props: {
     data: { type: Object, required: true },
   },
-  created() {
-    this.getCategories();
-  },
   computed: {
     postCategories: function () {
       let categories = Object.values(this.data.categories).map((item) => {
