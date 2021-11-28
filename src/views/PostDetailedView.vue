@@ -22,7 +22,9 @@
       </div>
     </template>
     <template v-else>
-      <div class="loader">Loading...</div>
+      <div class="loader">
+        <font-awesome-icon :icon="['fas', 'spinner']" />
+      </div>
     </template>
   </div>
 </template>
@@ -119,11 +121,43 @@ export default {
   font-weight: bold;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(72deg);
+  }
+  40% {
+    transform: rotate(144deg);
+  }
+  60% {
+    transform: rotate(216deg);
+  }
+  80% {
+    transform: rotate(288deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .loader {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  animation: rotate 2s linear;
+  animation-iteration-count: infinite;
+}
+
+.loader > svg {
+  height: 2em;
+  width: 2em;
+}
+
+.loader > svg > path {
+  fill: #0091ea;
 }
 
 ::v-deep iframe,

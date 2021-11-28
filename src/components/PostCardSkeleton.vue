@@ -20,15 +20,15 @@ export default {
 <style scoped>
 @keyframes pulse {
   0% {
-    background-color: #bdbdbd;
+    background-color: rgba(0, 0, 0, 0.05);
   }
 
   50% {
-    background-color: #ececec;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   100% {
-    background-color: #dfdfdf;
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -45,14 +45,16 @@ export default {
   margin-top: 10px;
   height: 30px;
   width: calc(100% - 40px);
-  animation: pulse 2s infinite ease-in-out;
+  animation: pulse 1s infinite ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 .post-thumbnail {
   margin-top: 10px;
   height: 175px;
   width: 100%;
-  animation: pulse 2s infinite ease-in-out;
+  animation: pulse 1s infinite ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 .post-content {
@@ -64,6 +66,7 @@ export default {
   margin-top: 10px;
   height: 20px;
   width: 150px;
-  animation: pulse 2s infinite ease-in-out;
+  animation: pulse 1s infinite ease-in-out;
+  animation-iteration-count: infinite;
 }
 </style>
