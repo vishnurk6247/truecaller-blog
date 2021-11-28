@@ -8,6 +8,7 @@ import {
   faChevronDown,
   faAngleDoubleRight,
   faAngleDoubleLeft,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -16,7 +17,8 @@ library.add(
   faChevronRight,
   faAngleDoubleRight,
   faAngleDoubleLeft,
-  faChevronDown
+  faChevronDown,
+  faSpinner
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

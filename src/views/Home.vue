@@ -18,7 +18,7 @@
       <div class="list-articles-container">
         <template v-if="postsLoading">
           <post-card-skeleton
-            v-for="item in Array(12)"
+            v-for="item in Array.from(Array(12).keys())"
             :key="item"
           ></post-card-skeleton>
         </template>
@@ -69,16 +69,15 @@ export default {
   },
   created() {
     this.fetchCategories();
-    this.fetchArticles();
+    this.fetchArticles(this.category);
   },
   watch: {
     pageNo: function () {
       this.scrollToView();
-      this.fetchArticles();
+      this.fetchArticles(this.category);
     },
     category: function () {
       this.scrollToView();
-      this.fetchArticles();
     },
   },
   methods: {
@@ -101,9 +100,9 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    fetchArticles: function () {
+    fetchArticles: function (category) {
       this.postsLoading = true;
-      getPosts(this.pageNo, this.category)
+      getPosts(this.pageNo, category)
         .then((res) => res.json())
         .then((data) => {
           this.posts = data.posts;

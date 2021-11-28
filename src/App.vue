@@ -22,6 +22,9 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   padding: 0;
@@ -30,15 +33,10 @@ body {
   color: rgba(0, 0, 0, 0.87);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
 }
 
 #app {
   width: 100vw;
   max-width: 100%;
-}
-
-.svg-inline--fa path {
-  fill: rgba(0, 0, 0, 0.87);
 }
 </style>
