@@ -2,6 +2,11 @@
   <div class="home-layout">
     <div class="home-banner">
       <h1 class="banner-text">The Truecaller Blog</h1>
+      <font-awesome-icon
+        :icon="['fas', 'chevron-down']"
+        class="scroll-down-arrow"
+        @click="scrollToView"
+      />
     </div>
     <section class="list-articles-wrapper" id="uid-posts-section">
       <h2 class="section-heading">Latest articles</h2>
@@ -130,7 +135,7 @@ export default {
 
 .banner-text {
   position: absolute;
-  top: calc(50% - 64px);
+  top: calc(45% - 64px);
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100vw;
@@ -139,6 +144,44 @@ export default {
   color: #fff;
   text-align: center;
   text-shadow: 1px 1px 2px rgb(0 0 0 / 30%);
+}
+
+@keyframes jumper {
+  0% {
+    top: 85%;
+  }
+  25% {
+    top: 80%;
+  }
+  50% {
+    top: 85%;
+  }
+  75% {
+    top: 90%;
+  }
+  100% {
+    top: 85%;
+  }
+}
+
+.scroll-down-arrow {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  height: 3em;
+  width: 2.625em;
+  transform: translate(-50%, 0);
+  cursor: pointer;
+  animation: jumper 3s linear;
+}
+
+.scroll-down-arrow:hover {
+  top: 87%;
+  transition: all 0.5s linear;
+}
+
+.scroll-down-arrow path {
+  fill: #fff;
 }
 
 .section-heading {
