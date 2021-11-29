@@ -22,6 +22,9 @@
             :key="item"
           ></post-card-skeleton>
         </template>
+        <template v-else-if="posts.length === 0">
+          <p class="no-post-msg">No posts found!</p>
+        </template>
         <template v-else>
           <post-card
             v-for="post in posts"
@@ -197,10 +200,17 @@ export default {
 }
 
 .list-articles-container {
+  position: relative;
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 350px);
   grid-gap: 30px;
+}
+
+.no-post-msg {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .pagination-container {
