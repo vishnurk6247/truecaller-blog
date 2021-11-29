@@ -191,6 +191,11 @@ export default {
   object-fit: contain;
 }
 
+::v-deep figcaption {
+  padding: 20px 0 30px 0;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 480px) {
   .post-image-bg {
     height: auto;

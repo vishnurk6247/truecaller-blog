@@ -72,15 +72,17 @@ export default {
   },
   created() {
     this.fetchCategories();
-    this.fetchArticles(this.category);
+    this.fetchArticles();
+  },
+  computed: {
+    postsApiHandler: function () {
+      return `${this.pageNo}|${this.category}`;
+    },
   },
   watch: {
-    pageNo: function () {
+    postsApiHandler: function () {
       this.scrollToView();
-      this.fetchArticles(this.category);
-    },
-    category: function () {
-      this.scrollToView();
+      this.fetchArticles();
     },
   },
   methods: {
@@ -105,9 +107,9 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    fetchArticles: function (category) {
+    fetchArticles: function () {
       this.postsLoading = true;
-      getPosts(this.pageNo, category)
+      getPosts(this.pageNo, this.category)
         .then((res) => {
           if (res.status === 200) return res.json();
         })
