@@ -1,5 +1,7 @@
 <template>
-  <footer class="app-footer"></footer>
+  <footer class="app-footer">
+    <p class="footer-text">© True Software Scandinavia AB</p>
+  </footer>
 </template>
 
 <script>
@@ -13,5 +15,11 @@ export default {
   height: 64px;
   width: 100%;
   background: #0f273a;
+}
+
+.footer-text {
+  margin-left: 30px;
+  padding-top: 23px;
+  color: #fff;
 }
 </style>

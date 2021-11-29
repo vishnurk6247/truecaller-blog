@@ -18,9 +18,12 @@
       <div class="list-articles-container">
         <template v-if="postsLoading">
           <post-card-skeleton
-            v-for="item in Array(12)"
+            v-for="item in Array.from(Array(12).keys())"
             :key="item"
           ></post-card-skeleton>
+        </template>
+        <template v-else-if="posts.length === 0">
+          <p class="no-post-msg">No posts found!</p>
         </template>
         <template v-else>
           <post-card
@@ -69,16 +72,15 @@ export default {
   },
   created() {
     this.fetchCategories();
-    this.fetchArticles();
+    this.fetchArticles(this.category);
   },
   watch: {
     pageNo: function () {
       this.scrollToView();
-      this.fetchArticles();
+      this.fetchArticles(this.category);
     },
     category: function () {
       this.scrollToView();
-      this.fetchArticles();
     },
   },
   methods: {
@@ -91,7 +93,9 @@ export default {
     },
     fetchCategories: function () {
       getCategories()
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 200) return res.json();
+        })
         .then((data) => {
           let categories = [
             { name: "All Categories", slug: "" },
@@ -101,10 +105,12 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    fetchArticles: function () {
+    fetchArticles: function (category) {
       this.postsLoading = true;
-      getPosts(this.pageNo, this.category)
-        .then((res) => res.json())
+      getPosts(this.pageNo, category)
+        .then((res) => {
+          if (res.status === 200) return res.json();
+        })
         .then((data) => {
           this.posts = data.posts;
           this.totalPosts = data.found;
@@ -194,10 +200,17 @@ export default {
 }
 
 .list-articles-container {
+  position: relative;
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 350px);
   grid-gap: 30px;
+}
+
+.no-post-msg {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .pagination-container {
