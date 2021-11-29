@@ -48,6 +48,7 @@ export default {
   },
   created() {
     this.fetchPostDetails();
+    document.getElementById("uid-app-header").scrollIntoView(true);
   },
   methods: {
     fetchPostDetails: function () {
