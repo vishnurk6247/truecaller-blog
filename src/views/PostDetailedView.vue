@@ -71,7 +71,6 @@ export default {
 
 <style scoped>
 .post-detailed-view {
-  position: relative;
   min-height: calc(100vh - 64px);
 }
 
@@ -149,17 +148,19 @@ export default {
 }
 
 .loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: rotate 2s linear;
-  animation-iteration-count: infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  height: 100%;
+  width: 100%;
 }
 
 .loader > svg {
   height: 2em;
   width: 2em;
+  animation: rotate 2s linear;
+  animation-iteration-count: infinite;
 }
 
 .loader > svg > path {
